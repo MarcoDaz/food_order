@@ -191,10 +191,7 @@ end
 class Dish
     def initialize(name, price)
     end
-
-    def price
-        @price.to_f
-    end
+    
     attr_reader
 end
 
