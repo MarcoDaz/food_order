@@ -66,16 +66,42 @@ Include the name of the method, it's parameters, return value, and side effects.
 #     end
 # end
 
-class Interface
+class Interface(io = Kernel)
     def run
-        # Show menu
-        # Ask for order
-        # Options: (1) Order more (2) Show Basket
+    # Ask for name
+    # Welcome {name}
+    # ask_for_dish
+    end
 
-        # Show Basket =>  Options: (1) Confirm Order (2) Show menu => Order more
+    def ask_for_dish # Valid dish name OR done
+    # Show menu
+    # Ask for order
+    # Options: valid dish name or Show Basket
+    end
 
-        # Confirm Order => Ask for number
-        # Confirm if number is valid, puts "number accepted"
+    def confirm_basket # 1 or 2
+    # Display Basket
+    # Options: (1) Confirm Order (2) Show menu => Order more
+    end
+
+    def ask_for_number
+    # Options:
+    # (1) Enter Contact Number for SMS confirmation
+    # (2) Back to basket
+    # (3) Order more (back to menu)
+    # If valid
+    end
+
+    def run
+    # Show menu
+    # Ask for order
+    # Options: valid dish name or Show Basket
+
+    # Show Basket =>  Options: (1) Confirm Order (2) Show menu => Order more
+
+    # Confirm Order => Ask for number or go back to menu
+    # Confirm if number is valid, puts "number accepted"
+    # Send text (30 mins after Time.now, in 24 Hour Clock Mode)
     end
 end
 
@@ -111,8 +137,8 @@ end
 
 end
 
-class BasketReader # initialized with a Basket instance
-    def confirm_order
+class BasketReader(basket, io = Kernel) # initialized with a Basket instance
+    def receipt
         # fails if basket is empty
         # Puts basket info in a nice formatted way
     end
@@ -122,42 +148,60 @@ class Basket # initialize with a Menu instance
     # holds a has of Dish instances to be ordered
     # { dish ->  }
 
-    def basket
+    def list
         # return array of Dish instances to be ordered
     end
 
-    def add(dish_name) # dish_name is a string that matches a dish name in the menu exactly
+    def add(dish_name, quantity) # dish_name is a string that matches a dish name in the menu exactly
+                                 # quantity is an integer
         # fails if dish is not in menu
+        # fails if quantity is not a positive integer
         # adds Dish instance to basket
     end
 
-    def remove(dish_name) # dish_name is a string that matches a dish name in the menu exactly
+    def remove(dish_name, quantity) # dish_name is a string that matches a dish name in the menu exactly
+                                    # quantity is an integer
         # fails if dish is not in Basket
+        # fails if quantity is not a positive integer less than or equal to the amount of dishes stored
         # remove Dish instance in basket
     end
 end
 
-class MenuReader # initialized with a Menu instance
-    def confirm_order
-        # fails if basket is empty
-        # Puts basket info in a nice formatted way
+class MenuReader(menu, io = Kernel) # initialized with a Menu instance
+    def display
+        # fails if menu is empty
+        # puts basket info in a nice formatted way i.e. receipt
     end
 end
 
 class Menu
     # holds an array of Dish instances
 
-    attr_reader
+    def list # => returns array
 
-    def 
+    end
+
+    def add(dish) # dish is an instance of Dish
+        add dish instance to array
+    end
+    
+ 
 end
 
 class Dish
     def initialize(name, price)
     end
 
+    def price
+        @price.to_f
+    end
     attr_reader
 end
+
+# e.g.
+dish_1 = Dish.new('food_1', 2.5)
+dish_2 = Dish.new('food_2', 5)
+dish_3 = Dish.new('food_3', 7.5)
 
 ```
 
@@ -170,8 +214,6 @@ Create examples of the classes being used together in different situations and c
 # As a customer
 # So that I can check if I want to order something
 # I would like to see a list of dishes with prices.
-
-
 
 # As a customer
 # So that I can order the meal I want
