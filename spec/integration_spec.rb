@@ -30,7 +30,7 @@ RSpec.describe 'Integration' do
   # As a customer
   # So that I can order the meal I want
   # I would like to be able to select some number of several available dishes.
-  xit 'can add to basket' do
+  it 'can add to basket' do
     dish1 = Dish.new('dish1', 2.5)
     dish2 = Dish.new('dish2', 5)
 
@@ -40,12 +40,12 @@ RSpec.describe 'Integration' do
 
     basket = Basket.new(menu)
     basket.add('dish1')
-    basket.add('dish2')
+    basket.add('dish2', 2)
 
-    expect(basket.list).to eq [dish1, dish2]
+    expect(basket.list).to eq [dish1, dish2, dish2]
   end
 
-  xit 'can remove from basket' do
+  it 'can remove from basket' do
     dish1 = Dish.new('dish1', 2.5)
     dish2 = Dish.new('dish2', 5)
 
@@ -54,17 +54,19 @@ RSpec.describe 'Integration' do
     menu.add(dish2)
 
     basket = Basket.new(menu)
-    basket.add('dish1')
-    basket.add('dish2')
+    basket.add('dish1', 3)
+    basket.add('dish2', 2)
+
+    basket.remove('dish1', 2)
     basket.remove('dish2')
 
-    expect(basket.list).to eq [dish1]
+    expect(basket.list).to eq [dish1, dish2]
   end
 
   # As a customer
   # So that I can verify that my order is correct
   # I would like to see an itemised receipt with a grand total.
-  xit 'is able to display an itemised receipt with a grand total' do
+  it 'is able to display an itemised receipt with a grand total' do
     dish1 = Dish.new('dish1', 2.5)
     dish2 = Dish.new('dish2', 5)
 

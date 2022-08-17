@@ -138,7 +138,7 @@ end
 end
 
 class BasketReader(basket, io = Kernel) # initialized with a Basket instance
-    def receipt
+    def display
         # fails if basket is empty
         # Puts basket info in a nice formatted way
     end
@@ -185,13 +185,15 @@ class Menu
         add dish instance to array
     end
     
- 
+    def find_dish_by_name(dish_name)
+        # => return dish instance with matching dish_name
+    end
 end
 
 class Dish
     def initialize(name, price)
     end
-    
+
     attr_reader
 end
 
